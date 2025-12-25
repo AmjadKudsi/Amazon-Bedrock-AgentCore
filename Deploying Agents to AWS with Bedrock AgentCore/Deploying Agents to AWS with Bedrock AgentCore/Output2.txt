@@ -1,0 +1,101 @@
+/usercode/FILESYSTEM$ bash /usercode/FILESYSTEM/.codesignal/setup.sh -a
+Initializing environment. Please wait some seconds...
+Environment setup is complete!
+/usercode/FILESYSTEM$ agentcore launch \
+> --env GUARDRAIL_ID=$GUARDRAIL_ID \
+> --env KNOWLEDGE_BASE_ID=$KNOWLEDGE_BASE_ID
+🚀 Launching Bedrock AgentCore (codebuild mode - RECOMMENDED)...
+   • Build ARM64 containers in the cloud with CodeBuild
+   • No local Docker required (DEFAULT behavior)
+   • Production-ready deployment
+
+💡 Deployment options:
+   • agentcore launch                → CodeBuild (current)
+   • agentcore launch --local        → Local development
+   • agentcore launch --local-build  → Local build + cloud deploy
+
+Starting CodeBuild ARM64 deployment for agent 'agent' to account 577397738982 (us-east-1)
+Starting CodeBuild ARM64 deployment for agent 'agent' to account 577397738982 (us-east-1)
+Setting up AWS resources (ECR repository, execution roles)...
+Getting or creating ECR repository for agent: agent
+Repository doesn't exist, creating new ECR repository: bedrock-agentcore-agent
+⠴ Launching Bedrock AgentCore...✅ ECR repository available: 577397738982.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-agent
+Getting or creating execution role for agent: agent
+Using AWS region: us-east-1, account ID: 577397738982
+Role name: AmazonBedrockAgentCoreSDKRuntime-us-east-1-d4f0bc5a29
+⠇ Launching Bedrock AgentCore...Role doesn't exist, creating new execution role: AmazonBedrockAgentCoreSDKRuntime-us-east-1-d4f0bc5a29
+Starting execution role creation process for agent: agent
+✓ Role creating: AmazonBedrockAgentCoreSDKRuntime-us-east-1-d4f0bc5a29
+Creating IAM role: AmazonBedrockAgentCoreSDKRuntime-us-east-1-d4f0bc5a29
+⠏ Launching Bedrock AgentCore...✓ Role created: arn:aws:iam::577397738982:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-d4f0bc5a29
+✓ Execution policy attached: BedrockAgentCoreRuntimeExecutionPolicy-agent
+Role creation complete and ready for use with Bedrock AgentCore
+✅ Execution role available: arn:aws:iam::577397738982:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-d4f0bc5a29
+Preparing CodeBuild project and uploading source...
+⠹ Launching Bedrock AgentCore...Getting or creating CodeBuild execution role for agent: agent
+Role name: AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-d4f0bc5a29
+⠸ Launching Bedrock AgentCore...CodeBuild role doesn't exist, creating new role: AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-d4f0bc5a29
+Creating IAM role: AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-d4f0bc5a29
+⠴ Launching Bedrock AgentCore...✓ Role created: arn:aws:iam::577397738982:role/AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-d4f0bc5a29
+Attaching inline policy: CodeBuildExecutionPolicy to role: AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-d4f0bc5a29
+⠦ Launching Bedrock AgentCore...✓ Policy attached: CodeBuildExecutionPolicy
+Waiting for IAM role propagation...
+⠸ Launching Bedrock AgentCore...CodeBuild execution role creation complete: arn:aws:iam::577397738982:role/AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-d4f0bc5a29
+⠴ Launching Bedrock AgentCore...Using .dockerignore with 44 patterns
+⠦ Launching Bedrock AgentCore...Uploaded source to S3: agent/20251113-211009.zip
+⠏ Launching Bedrock AgentCore...Created CodeBuild project: bedrock-agentcore-agent-builder
+Starting CodeBuild build (this may take several minutes)...
+⠹ Launching Bedrock AgentCore...Starting CodeBuild monitoring...
+🔄 QUEUED started (total: 0s)
+⠦ Launching Bedrock AgentCore...✅ QUEUED completed in 5.0s
+🔄 PROVISIONING started (total: 5s)
+⠹ Launching Bedrock AgentCore...✅ PROVISIONING completed in 10.1s
+🔄 PRE_BUILD started (total: 15s)
+⠇ Launching Bedrock AgentCore...✅ PRE_BUILD completed in 10.1s
+🔄 BUILD started (total: 25s)
+⠙ Launching Bedrock AgentCore...✅ BUILD completed in 55.5s
+🔄 POST_BUILD started (total: 81s)
+⠧ Launching Bedrock AgentCore...✅ POST_BUILD completed in 10.1s
+🔄 COMPLETED started (total: 91s)
+✅ COMPLETED completed in 0.0s
+🎉 CodeBuild completed successfully in 1m 30s
+CodeBuild completed successfully
+✅ CodeBuild project configuration saved
+Deploying to Bedrock AgentCore...
+⠇ Launching Bedrock AgentCore...✅ Agent created/updated: arn:aws:bedrock-agentcore:us-east-1:577397738982:runtime/agent-s59otHHpzE
+Polling for endpoint to be ready...
+⠴ Launching Bedrock AgentCore...Agent endpoint: arn:aws:bedrock-agentcore:us-east-1:577397738982:runtime/agent-s59otHHpzE/runtime-endpoint/DEFAULT
+Deployment completed successfully - Agent: arn:aws:bedrock-agentcore:us-east-1:577397738982:runtime/agent-s59otHHpzE
+✓ CodeBuild completed: bedrock-agentcore-agent-builder:66002c47-eb10-4d3e-aefb-062c6a303b62
+✓ ARM64 image pushed to ECR: 577397738982.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-agent:latest
+╭──────────────────────────────────── CodeBuild Deployment Complete ─────────────────────────────────────╮
+│ CodeBuild ARM64 Deployment Successful!                                                                 │
+│                                                                                                        │
+│ Agent Name: agent                                                                                      │
+│ CodeBuild ID: bedrock-agentcore-agent-builder:66002c47-eb10-4d3e-aefb-062c6a303b62                     │
+│ Agent ARN: arn:aws:bedrock-agentcore:us-east-1:577397738982:runtime/agent-s59otHHpzE                   │
+│ ECR URI: 577397738982.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-agent:latest                   │
+│                                                                                                        │
+│ ARM64 container deployed to Bedrock AgentCore.                                                         │
+│                                                                                                        │
+│ You can now check the status of your Bedrock AgentCore endpoint with:                                  │
+│ agentcore status                                                                                       │
+│                                                                                                        │
+│ You can now invoke your Bedrock AgentCore endpoint with:                                               │
+│ agentcore invoke '{"prompt": "Hello"}'                                                                 │
+│                                                                                                        │
+│ 📋 Agent logs available at:                                                                            │
+│    /aws/bedrock-agentcore/runtimes/agent-s59otHHpzE-DEFAULT                                            │
+│    /aws/bedrock-agentcore/runtimes/agent-s59otHHpzE-DEFAULT/runtime-logs                               │
+│                                                                                                        │
+│ 💡 Tail logs with:                                                                                     │
+│    aws logs tail /aws/bedrock-agentcore/runtimes/agent-s59otHHpzE-DEFAULT --follow                     │
+│    aws logs tail /aws/bedrock-agentcore/runtimes/agent-s59otHHpzE-DEFAULT --since 1h                   │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+/usercode/FILESYSTEM$ 
+
+Final Submission:
+Commands executed by the user:
+----------------------------------------------------------------------
+agentcore launch --env GUARDRAIL_ID=$GUARDRAIL_ID --env KNOWLEDGE_BASE_ID=$KNOWLEDGE_BASE_ID
+----------------------------------------------------------------------

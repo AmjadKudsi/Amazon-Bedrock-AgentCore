@@ -1,0 +1,101 @@
+/usercode/FILESYSTEM$ bash /usercode/FILESYSTEM/.codesignal/setup.sh -a
+Initializing environment. Please wait some seconds...
+Environment setup is complete!
+/usercode/FILESYSTEM$ agentcore configure --entrypoint main.py --name my_agent
+Configuring Bedrock AgentCore...
+Entrypoint parsed: file=/usercode/FILESYSTEM/main.py, bedrock_agentcore_name=main
+Agent name: my_agent
+
+🔐 Execution Role
+Press Enter to auto-create execution role, or provide execution role ARN/name to use existing
+Execution role ARN/name (or press Enter to auto-create):
+✓ Will auto-create execution role
+
+🏗️  ECR Repository
+Press Enter to auto-create ECR repository, or provide ECR Repository URI to use existing
+ECR Repository URI (or press Enter to auto-create):
+✓ Will auto-create ECR repository
+
+🔍 Detected dependency file: requirements.txt
+Press Enter to use this file, or type a different path (use Tab for autocomplete):
+Path or Press Enter to use detected dependency file:
+✓ Using detected file: requirements.txt
+
+🔐 Authorization Configuration
+By default, Bedrock AgentCore uses IAM authorization.
+Configure OAuth authorizer instead? (yes/no) [no]:
+✓ Using default IAM authorization
+Configuring BedrockAgentCore agent: my_agent
+
+⚠️  ℹ️  No container engine found (Docker/Finch/Podman not installed)
+✅ Default deployment uses CodeBuild (no container engine needed)
+💡 Run 'agentcore launch' for cloud-based building and deployment
+💡 For local builds, install Docker, Finch, or Podman
+
+⚠️  [WARNING] Platform mismatch: Current system is 'linux/amd64' but Bedrock AgentCore requires 
+'linux/arm64'.
+For deployment options and workarounds, see: 
+https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/getting-started-custom.html
+
+Generated .dockerignore
+Generated Dockerfile: /usercode/FILESYSTEM/Dockerfile
+Generated .dockerignore: /usercode/FILESYSTEM/.dockerignore
+Setting 'my_agent' as default agent
+╭───────────────────────────────────── Bedrock AgentCore Configured ─────────────────────────────────────╮
+│ Configuration Summary                                                                                  │
+│                                                                                                        │
+│ Name: my_agent                                                                                         │
+│ Runtime: None                                                                                          │
+│ Region: us-east-1                                                                                      │
+│ Account: 440716895604                                                                                  │
+│ Execution Role: None                                                                                   │
+│ ECR: Auto-create                                                                                       │
+│ Authorization: IAM (default)                                                                           │
+│                                                                                                        │
+│ Configuration saved to: /usercode/FILESYSTEM/.bedrock_agentcore.yaml                                   │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+/usercode/FILESYSTEM$ 
+
+
+
+
+
+
+Final Submission:
+Commands executed by the user:
+----------------------------------------------------------------------
+agentcore configure --entrypoint main.py --name my_agent
+----------------------------------------------------------------------
+
+Running tests:
+Contents from .bedrock_agentcore.yaml file:
+default_agent: my_agent
+agents:
+  my_agent:
+    name: my_agent
+    entrypoint: main.py
+    platform: linux/arm64
+    container_runtime: none
+    aws:
+      execution_role: null
+      execution_role_auto_create: true
+      account: '440716895604'
+      region: us-east-1
+      ecr_repository: null
+      ecr_auto_create: true
+      network_configuration:
+        network_mode: PUBLIC
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+    bedrock_agentcore:
+      agent_id: null
+      agent_arn: null
+      agent_session_id: null
+    codebuild:
+      project_name: null
+      execution_role: null
+      source_bucket: null
+    authorizer_configuration: null
+    oauth_configuration: null

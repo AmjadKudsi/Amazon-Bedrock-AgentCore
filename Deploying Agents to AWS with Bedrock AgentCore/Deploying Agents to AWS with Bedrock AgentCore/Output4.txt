@@ -1,0 +1,71 @@
+/usercode/FILESYSTEM$ bash /usercode/FILESYSTEM/.codesignal/setup.sh -a
+Initializing environment. Please wait some seconds...
+Environment setup is complete!
+/usercode/FILESYSTEM$ agentcore invoke '{"prompt":"How do we deploy our agents on AWS?"}'
+Payload:
+{
+  "prompt": "How do we deploy our agents on AWS?"
+}
+Invoking BedrockAgentCore agent 'my_agent' via cloud endpoint
+Session ID: 37821b45-7e08-43e0-96b3-392adb1e366c
+
+Response:
+{
+  "ResponseMetadata": {
+    "RequestId": "6c4f0c1b-7125-4648-bea9-4a604c599c41",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "date": "Thu, 13 Nov 2025 21:19:27 GMT",
+      "content-type": "application/json",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "x-amzn-requestid": "6c4f0c1b-7125-4648-bea9-4a604c599c41",
+      "baggage": 
+"Self=1-69164b28-1c168ffc6bda659429c222b7,session.id=37821b45-7e08-43e0-96b3-392adb1e366c",
+      "x-amzn-bedrock-agentcore-runtime-session-id": "37821b45-7e08-43e0-96b3-392adb1e366c",
+      "x-amzn-trace-id": 
+"Root=1-69164b28-75800d214827f5ae48ca167e;Parent=5061658cdabed25d;Sampled=1;Self=1-69164b28-1c168ffc6bda65
+9429c222b7"
+    },
+    "RetryAttempts": 0
+  },
+  "runtimeSessionId": "37821b45-7e08-43e0-96b3-392adb1e366c",
+  "traceId": 
+"Root=1-69164b28-75800d214827f5ae48ca167e;Parent=5061658cdabed25d;Sampled=1;Self=1-69164b28-1c168ffc6bda65
+9429c222b7",
+  "baggage": "Self=1-69164b28-1c168ffc6bda659429c222b7,session.id=37821b45-7e08-43e0-96b3-392adb1e366c",
+  "contentType": "application/json",
+  "statusCode": 200,
+  "response": [
+    "b'{\"result\": \"Based on the information I found in your knowledge base, I can provide guidance on 
+deploying agents on AWS. Here are the key deployment patterns and recommendations:\\\\n\\\\n## AWS Agent 
+Deployment Options\\\\n\\\\n### 1. **Lambda-based Deployment** (Recommended for Serverless)\\\\nFrom your 
+documentation, I can see this pattern is used for AI agents like Nimbus Assist:\\\\n- **API Gateway 
+\\xe2\\x86\\x92 Lambda \\xe2\\x86\\x92 Bedrock Runtime** architecture\\\\n- Serverless scaling with no 
+infrastructure management\\\\n- Cost-effective for variable workloads\\\\n- Built-in security with IAM 
+roles\\\\n\\\\n### 2. **Container-based Deployment**\\\\nFor more complex agents requiring longer 
+execution times or specific runtime environments:\\\\n- **Amazon ECS with Fargate**: Serverless 
+containers\\\\n- **Amazon EKS**: For Kubernetes-based orchestration\\\\n- **EC2 with containers**: For 
+more control over infrastructure\\\\n\\\\n### 3. **IoT Agents** \\\\nFor edge/device agents (as shown in 
+your EdgeLink Gateway):\\\\n- **AWS IoT Core**: For device communication via MQTT\\\\n- **Lamb'",
+    "b'da functions**: For control plane operations\\\\n- **X.509 certificates**: For device 
+authentication\\\\n\\\\n## Key Deployment Considerations\\\\n\\\\n### **Security & 
+Multi-Tenancy**\\\\nYour tenant isolation strategy shows best practices:\\\\n- **IAM roles** with 
+tenant-scoped permissions\\\\n- **STS session tags** for `tenantId` isolation\\\\n- **KMS per-tenant 
+CMKs** for encryption\\\\n- **Resource-level isolation** (S3 prefixes, DynamoDB composite 
+keys)\\\\n\\\\n### **Infrastructure Components**\\\\nBased on your RAG system design:\\\\n```\\\\nData 
+Sources (S3) \\xe2\\x86\\x92 Knowledge Base \\xe2\\x86\\x92 Lambda Functions \\xe2\\x86\\x92 API Gateway 
+\\xe2\\x86\\x92 Client\\\\n```\\\\n\\\\n### **Monitoring & Observability**\\\\n- **CloudTrail** for audit 
+logging\\\\n- **Request/response traces** for debugging\\\\n- **Performance metrics** (P50/P95 
+latency)\\\\n- **Cost tracking** per usage\\\\n\\\\n### **Failure Handling**\\\\n- **Circuit breakers** 
+for latency budgets\\\\n- **Fallback mechanisms** for empty responses\\\\n- **Caching strategies** for 
+performance\\\\n- **Health checks** and automated recovery\\\\n\\\\n## Recommended Deplo'",
+    "b'yment Steps\\\\n\\\\n1. **Choose your compute platform** based on agent requirements\\\\n2. **Set 
+up IAM roles** with least privilege access\\\\n3. **Configure security layers** (encryption, network 
+isolation)\\\\n4. **Implement monitoring** and alerting\\\\n5. **Set up CI/CD pipelines** with proper 
+testing\\\\n6. **Plan for scaling** and cost optimization\\\\n\\\\nWould you like me to provide more 
+specific guidance for any particular type of agent you\\'re planning to deploy, or dive deeper into any of
+these deployment patterns?\\\\n\"}'"
+  ]
+}
+/usercode/FILESYSTEM$ 

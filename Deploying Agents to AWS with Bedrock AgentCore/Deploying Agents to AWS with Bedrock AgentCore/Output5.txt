@@ -1,0 +1,121 @@
+/usercode/FILESYSTEM$ bash /usercode/FILESYSTEM/.codesignal/setup.sh -a
+Initializing environment. Please wait some seconds...
+Environment setup is complete!
+/usercode/FILESYSTEM$ agentcore invoke '{"prompt":"What is Amazon Bedrock?"}'
+Payload:
+{
+  "prompt": "What is Amazon Bedrock?"
+}
+Invoking BedrockAgentCore agent 'my_agent' via cloud endpoint
+Session ID: ffe5da78-050f-432b-a666-59b66293c2e5
+
+Response:
+{
+  "ResponseMetadata": {
+    "RequestId": "cf80344b-03cd-4c0f-9563-75556d2768e9",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "date": "Thu, 13 Nov 2025 21:25:06 GMT",
+      "content-type": "application/json",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "x-amzn-requestid": "cf80344b-03cd-4c0f-9563-75556d2768e9",
+      "baggage": 
+"Self=1-69164ca3-252ff2423f166c4d55bdb281,session.id=ffe5da78-050f-432b-a666-59b66293c2e5",
+      "x-amzn-bedrock-agentcore-runtime-session-id": "ffe5da78-050f-432b-a666-59b66293c2e5",
+      "x-amzn-trace-id": 
+"Root=1-69164ca3-6940d79052dca89206b0e075;Parent=ca31391f2f84efef;Sampled=1;Self=1-69164ca3-252ff2423f166c
+4d55bdb281"
+    },
+    "RetryAttempts": 0
+  },
+  "runtimeSessionId": "ffe5da78-050f-432b-a666-59b66293c2e5",
+  "traceId": 
+"Root=1-69164ca3-6940d79052dca89206b0e075;Parent=ca31391f2f84efef;Sampled=1;Self=1-69164ca3-252ff2423f166c
+4d55bdb281",
+  "baggage": "Self=1-69164ca3-252ff2423f166c4d55bdb281,session.id=ffe5da78-050f-432b-a666-59b66293c2e5",
+  "contentType": "application/json",
+  "statusCode": 200,
+  "response": [
+    "b'{\"result\": \"Based on my search of the knowledge base, I can provide you with comprehensive 
+information about Amazon Bedrock:\\\\n\\\\n## Amazon Bedrock Overview\\\\n\\\\nAmazon Bedrock is AWS\\'s 
+fully managed service that provides access to foundation models (FMs) from leading AI companies through a 
+single API. Based on the retrieved information, here are the key aspects:\\\\n\\\\n### Core 
+Capabilities\\\\n\\\\n**Foundation Model Access**: Bedrock provides access to various foundation models 
+that can be used for different AI tasks, including text generation, embeddings, and 
+more.\\\\n\\\\n**Knowledge Bases Integration**: Bedrock includes Knowledge Bases functionality that 
+enables Retrieval-Augmented Generation (RAG) capabilities. This allows you to:\\\\n- Connect your own data
+sources (like documents in S3)\\\\n- Create vector indexes for semantic search\\\\n- Combine retrieval 
+with generation for more accurate, contextual responses\\\\n\\\\n### Key Features Used in 
+Practice\\\\n\\\\n1. **Embeddings**: Uses models like `amazon.titan-embed-text-v2` for creating'",
+    "b' vector representations of text\\\\n\\\\n2. **Text Generation**: Supports various model families 
+for generating responses with configurable parameters\\\\n\\\\n3. **Integration with AWS Services**:\\\\n 
+- **OpenSearch Serverless** for vector storage and hybrid search (BM25 + kNN)\\\\n   - **S3** for document
+storage\\\\n   - **Lambda** for orchestration\\\\n   - **API Gateway** for API management\\\\n\\\\n### 
+Common Use Cases\\\\n\\\\nFrom the documentation, Bedrock is commonly used for:\\\\n\\\\n- **AI-powered 
+support assistants** that can answer questions using company knowledge bases\\\\n- **RAG 
+(Retrieval-Augmented Generation)** applications that combine document retrieval with AI generation\\\\n- 
+**Customer self-service** solutions with citation-backed answers\\\\n- **Agent assistance** tools for 
+support teams\\\\n\\\\n### Architecture Benefits\\\\n\\\\n- **Serverless and Managed**: No infrastructure 
+to manage\\\\n- **Security**: Integrates with AWS IAM, KMS encryption, and VPC endpoints\\\\n- 
+**Scalability**: Handles varying workloads automatically\\\\n- **Multi-tenant Su'",
+    "b'pport**: Can be configured for SaaS applications with proper isolation\\\\n\\\\n### Cost 
+Management\\\\n\\\\nBedrock usage can be controlled through:\\\\n- Token budgets and limits\\\\n- Request 
+quotas and rate limiting\\\\n- AWS Budgets integration for cost monitoring\\\\n- Model tier selection 
+based on criticality\\\\n\\\\nAmazon Bedrock essentially democratizes access to powerful AI models while 
+providing the enterprise-grade security, compliance, and integration capabilities that AWS is known 
+for.\\\\n\"}'"
+  ]
+}
+/usercode/FILESYSTEM$ agentcore invoke '{"prompt":"Tell me more"}'
+Payload:
+{
+  "prompt": "Tell me more"
+}
+Invoking BedrockAgentCore agent 'my_agent' via cloud endpoint
+
+^[c^C/usercode/FILESYSTEM$ agentcore invoke '{"prompt":"What was my last message?"}' --session-id sess-20250829-ABCDEFGHJKLMNPQRSTU
+Payload:
+{
+  "prompt": "What was my last message?"
+}
+Invoking BedrockAgentCore agent 'my_agent' via cloud endpoint
+Session ID: sess-2025020250829-ABCDEFGHJKLMNPQRSTU
+
+Response:
+{
+  "ResponseMetadata": {
+    "RequestId": "b85bbd41-5db3-4db5-88fd-82d8a9855136",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "date": "Thu, 13 Nov 2025 21:31:48 GMT",
+      "content-type": "application/json",
+      "transfer-encoding": "chunked",
+      "connection": "keep-alive",
+      "x-amzn-requestid": "b85bbd41-5db3-4db5-88fd-82d8a9855136",
+      "baggage": 
+"Self=1-69164e39-5a56a7b2726a70e223b92053,session.id=sess-2025020250829-ABCDEFGHJKLMNPQRSTU",
+      "x-amzn-bedrock-agentcore-runtime-session-id": "sess-2025020250829-ABCDEFGHJKLMNPQRSTU",
+      "x-amzn-trace-id": 
+"Root=1-69164e39-540013ca631406326fa70b80;Parent=74fcdbeac71a3aab;Sampled=1;Self=1-69164e39-5a56a7b2726a70
+e223b92053"
+    },
+    "RetryAttempts": 0
+  },
+  "runtimeSessionId": "sess-2025020250829-ABCDEFGHJKLMNPQRSTU",
+  "traceId": 
+"Root=1-69164e39-540013ca631406326fa70b80;Parent=74fcdbeac71a3aab;Sampled=1;Self=1-69164e39-5a56a7b2726a70
+e223b92053",
+  "baggage": "Self=1-69164e39-5a56a7b2726a70e223b92053,session.id=sess-2025020250829-ABCDEFGHJKLMNPQRSTU",
+  "contentType": "application/json",
+  "statusCode": 200,
+  "response": [
+    "b'{\"result\": \"I don\\'t have access to your previous messages or conversation history beyond 
+what\\'s currently visible in our chat. Each conversation starts fresh for me, and I can only see the 
+messages within our current session.\\\\n\\\\nIf you\\'d like to refer to something from an earlier 
+message, you could:\\\\n1. Scroll up to review your previous messages in this conversation\\\\n2. Repeat 
+or rephrase your previous question if you\\'d like me to help with it again\\\\n\\\\nIs there something 
+specific you were asking about that I can help you with now?\\\\n\"}'"
+  ]
+}
+/usercode/FILESYSTEM$ 
