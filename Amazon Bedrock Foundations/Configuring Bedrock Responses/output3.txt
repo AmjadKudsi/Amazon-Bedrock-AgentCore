@@ -1,0 +1,70 @@
+=== BRIEF SUMMARY (128 tokens) ===
+# AWS Lambda Overview
+
+AWS Lambda is a **serverless compute service** that lets you run code without provisioning or managing servers. You simply upload your code, and Lambda automatically handles the infrastructure needed to run and scale your applications.
+
+## How Lambda Works
+
+1. **Upload your code** as a Lambda function
+2. **Set up triggers** from AWS services, HTTP endpoints, or in-app activity
+3. **Lambda automatically runs** your code when triggered
+4. **Pay only** for the compute time you consume
+
+## Key Benefits for Developers
+
+### 🚀 **Zero Server Management**
+
+=== DETAILED EXPLANATION (512 tokens) ===
+# AWS Lambda Overview
+
+AWS Lambda is a **serverless compute service** that lets you run code without provisioning or managing servers. You simply upload your code, and Lambda automatically handles the compute resources needed to run it.
+
+## How Lambda Works
+
+1. **Upload your code** as a Lambda function
+2. **Set up triggers** from AWS services, HTTP endpoints, or in-app activity
+3. **Lambda automatically runs** your code when triggered
+4. **Pay only** for the compute time you consume
+
+## Key Benefits for Developers
+
+### 🚀 **Zero Server Management**
+- No need to provision, patch, or maintain servers
+- Focus entirely on writing code, not infrastructure
+- Automatic scaling and high availability built-in
+
+### 💰 **Cost-Effective**
+- Pay only for actual execution time (billed per 100ms)
+- No charges when code isn't running
+- Free tier includes 1M requests and 400,000 GB-seconds per month
+
+### ⚡ **Automatic Scaling**
+- Scales from zero to thousands of concurrent executions
+- Handles traffic spikes automatically
+- No capacity planning required
+
+### 🔧 **Easy Integration**
+- Native integration with 200+ AWS services
+- Trigger from S3, DynamoDB, API Gateway, CloudWatch, and more
+- Built-in security with IAM roles and VPC support
+
+### 🌐 **Multiple Language Support**
+- Python, Node.js, Java, C#, Go, Ruby, PowerShell
+- Custom runtimes for other languages
+- Familiar development experience
+
+### ⚡ **Fast Development Cycle**
+- Deploy code in seconds
+- Built-in monitoring with CloudWatch
+- Easy testing and debugging tools
+
+## Common Use Cases
+
+- **API backends** (with API Gateway)
+- **Data processing** (ETL jobs, file processing)
+- **Real-time stream processing**
+- **Scheduled tasks** and automation
+- **Microservices architecture**
+- **Event-driven applications**
+
+Lambda is ideal for developers who want to build scalable applications quickly without the overhead of managing infrastructure.
