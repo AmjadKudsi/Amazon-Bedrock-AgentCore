@@ -1,4 +1,4 @@
-// transform the AI assistant from giving focused technical answers to being more creative for brainstorming scenarios
+# transform the AI assistant from giving focused technical answers to being more creative for brainstorming scenarios
 
 import boto3
 

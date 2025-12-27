@@ -1,5 +1,5 @@
-// create three different inference configurations that demonstrate varying levels of creativity and predictability
-// Each configuration uses a different combination of temperature and top-p values to achieve conservative, balanced, or creative response styles
+# create three different inference configurations that demonstrate varying levels of creativity and predictability
+# Each configuration uses a different combination of temperature and top-p values to achieve conservative, balanced, or creative response styles
 
 import boto3
 

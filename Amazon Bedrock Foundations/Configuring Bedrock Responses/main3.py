@@ -1,4 +1,4 @@
-// configure two different token limits for the same AWS Lambda query
+# configure two different token limits for the same AWS Lambda query
 
 import boto3
 

@@ -1,4 +1,4 @@
-// convert a general AWS assistant into a specialized security expert
+# convert a general AWS assistant into a specialized security expert
 
 import boto3
 
