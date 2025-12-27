@@ -1,0 +1,75 @@
+User: Please provide a brief overview of Amazon Lambda. Include key features, use cases, pricing models, and target scenarios.
+Assistant: # Amazon Lambda Overview
+
+## What is AWS Lambda?
+AWS Lambda is a serverless compute service that runs your code in response to events without requiring you to provision or manage servers. You simply upload your code, and Lambda handles the execution environment automatically.
+
+## Key Features
+
+### **Serverless Architecture**
+- No server management required
+- Automatic scaling from zero to thousands of concurrent executions
+- Built-in fault tolerance and high availability
+
+### **Event-Driven Execution**
+- Triggers from 200+ AWS services and SaaS applications
+- Supports synchronous and asynchronous invocations
+- Real-time file processing, stream processing, and web applications
+
+### **Multiple Runtime Support**
+- Python, Node.js, Java, C#, Go, Ruby, PowerShell
+- Custom runtimes via Lambda Runtime API
+- Container image support (up to 10GB)
+
+### **Flexible Resource Configuration**
+- Memory: 128 MB to 10,240 MB
+- Timeout: Up to 15 minutes
+- Temporary storage: Up to 10,240 MB
+
+## Common Use Cases
+
+- **API Backends** - RESTful APIs with API Gateway
+- **Data Processing** - ETL jobs, file processing, real-time analytics
+- **Event Processing** - IoT data streams, log analysis
+- **Automation** -
+
+User: Based on the overview you provided, can you give me more detailed information specifically about integration patterns?
+Assistant: # AWS Lambda Integration Patterns
+
+## Event Source Patterns
+
+### **Push Model (Synchronous)**
+- **API Gateway Integration**
+  - Direct invocation for REST/HTTP APIs
+  - Request/response pattern with immediate results
+  - Custom authorizers and request validation
+
+- **Application Load Balancer**
+  - Lambda as target for ALB rules
+  - HTTP(S) request routing to functions
+  - Multi-value headers and query parameters support
+
+- **Direct Invocation**
+  - AWS SDK, CLI, or console invocation
+  - Cross-service invocation (Step Functions, etc.)
+  - Custom applications calling Lambda directly
+
+### **Push Model (Asynchronous)**
+- **S3 Event Notifications**
+  - Object creation, deletion, or modification triggers
+  - Automatic retry with exponential backoff
+  - Dead letter queue support
+
+- **SNS/EventBridge Integration**
+  - Fan-out messaging patterns
+  - Event filtering and routing
+  - Cross-account event processing
+
+- **CloudWatch Events/Logs**
+  - Scheduled executions (cron-like)
+  - Log group subscriptions for real-time processing
+
+### **Pull Model (Stream Processing)**
+- **Kinesis Data Streams**
+  - Real-time data processing
+  - Configurable batch sizes and parallelization
