@@ -1,4 +1,4 @@
-// create two conversation turns that demonstrate both template formatting and prompt chaining
+# create two conversation turns that demonstrate both template formatting and prompt chaining
 
 import boto3
 

@@ -1,4 +1,4 @@
-// modify the template variables in the provided code to explore a different AWS service and ask about a different aspect of that service
+# modify the template variables in the provided code to explore a different AWS service and ask about a different aspect of that service
 
 import boto3
 

@@ -1,4 +1,4 @@
-// implement the complete send_message function, which handles the entire conversation flow from user input to assistant response
+# implement the complete send_message function, which handles the entire conversation flow from user input to assistant response
 
 import boto3
 
