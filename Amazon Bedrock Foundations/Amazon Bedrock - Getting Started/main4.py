@@ -1,4 +1,4 @@
-// complete the response parsing logic in the provided code
+# complete the response parsing logic in the provided code
 
 import boto3
 

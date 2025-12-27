@@ -1,4 +1,4 @@
-// build the correct message structure that Bedrock's converse API expects
+# build the correct message structure that Bedrock's converse API expects
 
 import boto3
 

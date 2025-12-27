@@ -1,4 +1,4 @@
-// complete the essential setup code needed to interact with Bedrock's AI models
+# complete the essential setup code needed to interact with Bedrock's AI models
 
 import boto3
 

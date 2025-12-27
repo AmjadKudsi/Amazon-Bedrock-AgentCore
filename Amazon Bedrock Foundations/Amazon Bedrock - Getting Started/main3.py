@@ -1,4 +1,4 @@
-// complete the interaction by implementing proper error handling and making the actual API call
+# complete the interaction by implementing proper error handling and making the actual API call
 
 import boto3
 
