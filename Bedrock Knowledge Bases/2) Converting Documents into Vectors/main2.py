@@ -1,4 +1,4 @@
-// create the embedding request dictionary with the correct parameters
+# create the embedding request dictionary with the correct parameters
 
 import json
 import boto3

@@ -1,4 +1,4 @@
-// insert these prepared vectors into the S3 vector index
+# insert these prepared vectors into the S3 vector index
 
 import json
 import boto3

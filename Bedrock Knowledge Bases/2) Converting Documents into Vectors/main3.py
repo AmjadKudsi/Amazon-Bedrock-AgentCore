@@ -1,4 +1,4 @@
-// complete the vector preparation logic in the provided code
+# complete the vector preparation logic in the provided code
 
 import json
 import boto3
