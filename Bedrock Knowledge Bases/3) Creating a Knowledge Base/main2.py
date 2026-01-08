@@ -1,4 +1,4 @@
-# complete the create_knowledge_base API call by adding the three essential parameters that every knowledge base requires
+# configure the vector settings that will enable intelligent document retrieval
 
 import os
 import uuid
@@ -35,12 +35,10 @@ EMBEDDING_DIMENSIONS = 1024
 try:
     # Create Bedrock Knowledge Base
     kb_response = bedrock_agent_client.create_knowledge_base(
-        # TODO: Add the name parameter using KB_NAME
         name=KB_NAME,
-        # TODO: Add the description parameter with an appropriate description
         description="Knowledge base using S3 Vectors for document retrieval",
-        # TODO: Add the roleArn parameter using KB_ROLE_ARN
         roleArn=KB_ROLE_ARN,
+        # TODO: Add knowledgeBaseConfiguration parameter with vector configuration
         knowledgeBaseConfiguration={
             "type": "VECTOR",
             "vectorKnowledgeBaseConfiguration": {
@@ -61,20 +59,10 @@ try:
             },
         },
         clientToken=str(uuid.uuid4()),  # Unique client token for idempotency
+
     )
 
-    # Extract the Knowledge Base ID from the response
-    knowledge_base_id = kb_response["knowledgeBase"]["knowledgeBaseId"]
-    print(f"Knowledge Base ID: {knowledge_base_id}")
-
-    # Check the status of the newly created Knowledge Base
-    kb_status = bedrock_agent_client.get_knowledge_base(
-        knowledgeBaseId=knowledge_base_id
-    )
-    
-    # Get the current status of the Knowledge Base
-    status = kb_status["knowledgeBase"]["status"]
-    print(f"Knowledge Base Status: {status}")
+    print("Knowledge Base created successfully!")
 
 except Exception as e:
     print(f"Error: {e}")
