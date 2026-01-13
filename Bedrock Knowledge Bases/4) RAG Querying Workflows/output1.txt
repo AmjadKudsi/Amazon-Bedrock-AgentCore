@@ -1,0 +1,42 @@
+Direct search results for 'What is Nimbus Assist?':
+  1. Key: brd-nimbus-assist, Distance: 0.4789
+  2. Key: prd-nimbus-assist-v1, Distance: 0.5374
+
+Query: What is Nimbus Assist?
+Answer: Nimbus Assist is an AI-powered support agent designed to reduce human ticket volume by providing fast, accurate, and citeable answers to customer questions using curated internal knowledge. It is intended to address issues such as the high volume of "known answers" buried in wikis and runbooks, and the time agents spend searching for information. 
+
+Key features of Nimbus Assist include:
+- **Retrieval-augmented generation (RAG)** using Bedrock Knowledge Bases.
+- **Citations** for answers to ensure traceability and compliance.
+- **Guardrails** to prevent PII leakage and handle unsupported topics.
+- **Multilingual support** with English as the primary language and Spanish/German as fallbacks.
+- **Admin console** for source curation and evaluation dashboards.
+
+The system is designed to deliver answers with a P50 latency of ≤ 1200 ms and a P95 latency of ≤ 2500 ms, aiming for a 99.9% availability SLO. It also ensures security through KMS encryption at rest and TLS 1.2+ in transit.
+Sources:
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+
+Query: In Nimbus Assist's RAG pipeline, what are the default retrieval parameters and which metadata filters are applied by default?
+Answer: The default retrieval parameters in Nimbus Assist's RAG pipeline are as follows:
+- Chunk size: 1200–1800 tokens, with an overlap of 150 tokens.
+- Top-k: 8, using a hybrid rerank by score and recency (with a half-life of 30 days).
+
+The metadata filters applied by default are:
+- `product`
+- `version`
+- `complianceLevel`.
+Sources:
+  - design-rag-nimbus-assist.md
+  - design-rag-nimbus-assist.md
+
+Query: What is Tech Company Inc.'s paid time off (PTO) policy?
+Answer: The model cannot find sufficient information to answer the question about Tech Company Inc.'s paid time off (PTO) policy. The provided search results discuss code review policies and meeting principles but do not mention any details regarding PTO policies.
+Sources:
