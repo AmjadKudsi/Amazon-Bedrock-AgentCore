@@ -1,0 +1,35 @@
+Direct search results for 'What is Nimbus Assist?':
+  1. Key: brd-nimbus-assist, Distance: 0.4789
+  2. Key: prd-nimbus-assist-v1, Distance: 0.5374
+  3. Key: design-rag-nimbus-assist, Distance: 0.5871
+
+Query: What is Nimbus Assist?
+Answer: Nimbus Assist is an AI-powered support agent designed to reduce human ticket volume by providing fast, accurate, and citeable answers to customer questions using curated internal knowledge. It is intended to deliver answers with top 1-3 citations, ensuring compliance and traceability. The system is built using retrieval-augmented generation (RAG) with Bedrock Knowledge Bases, and it includes guardrails for handling personally identifiable information (PII) and unsupported topics. Nimbus Assist is multilingual, primarily supporting English with fallback options for Spanish and German. It operates with a high availability service level objective (SLO) of 99.9% and ensures data security through KMS encryption at rest and TLS 1.2+ in transit.
+Sources:
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+  - brd-nimbus-assist.md
+
+Query: In Nimbus Assist's RAG pipeline, what are the default retrieval parameters and which metadata filters are applied by default?
+Answer: Based on the retrieved results, the default retrieval parameters and metadata filters for Nimbus Assist's RAG pipeline are as follows:
+
+- **Default Retrieval Parameters:**
+  - Chunk size: 1200–1800 tokens, with an overlap of 150 tokens.
+  - Top-k: 8, using a hybrid rerank by score and recency (with a half-life of 30 days).
+
+- **Default Metadata Filters:**
+  - `product`
+  - `version`
+  - `complianceLevel`.
+
+These parameters and filters are used to optimize the retrieval process for relevant and up-to-date information.
+Sources:
+  - design-rag-nimbus-assist.md
+  - design-rag-nimbus-assist.md
+  - design-rag-nimbus-assist.md
+
+Query: What is Tech Company Inc.'s paid time off (PTO) policy?
+Answer: The model cannot find sufficient information to answer the question about Tech Company Inc.'s paid time off (PTO) policy. The provided search results discuss code review policies, meeting principles, and a product roadmap document, but none of them mention the company's PTO policy.
+Sources:
