@@ -1,0 +1,32 @@
+I'll help you calculate the total monthly cost by first getting the AWS pricing information, then using the calculator to compute the costs step by step.
+Tool #1: aws_pricing
+Now I'll calculate the costs step by step using the calculator tool.
+
+**Step 1: Calculate S3 Storage Cost (after free tier)**
+Tool #2: calculator
+**Step 2: Calculate S3 GET Requests Cost (after free tier)**
+Tool #3: calculator
+**Step 3: Calculate S3 PUT Requests Cost (after free tier)**
+Tool #4: calculator
+**Step 4: Calculate Total S3 Cost**
+Tool #5: calculator
+**Step 5: Calculate EC2 t3.small Cost for 100 hours**
+Tool #6: calculator
+**Step 6: Calculate Final Total Cost**
+Tool #7: calculator
+## Summary
+
+Here's the breakdown of your total monthly AWS costs:
+
+**S3 Costs (after free tier):**
+- Storage: 45 GB (50 GB - 5 GB free) × $0.023 = $1.035
+- GET Requests: 10,000 requests (30,000 - 20,000 free) × $0.0004/1,000 = $0.004
+- PUT Requests: 3,000 requests (5,000 - 2,000 free) × $0.005/1,000 = $0.015
+- **S3 Subtotal: $1.054**
+
+**EC2 Costs:**
+- t3.small instance: 100 hours × $0.0208/hour = $2.080
+
+**Total Monthly Cost: $3.13 USD**
+
+Note: The EC2 t3.small instance doesn't qualify for the free tier (only t2.micro does), so the full hourly rate applies.

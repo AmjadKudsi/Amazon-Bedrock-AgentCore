@@ -19,7 +19,7 @@ model = BedrockModel(
 )
 
 # TODO: Define the system prompt for a Creative Writing Agent
-system_prompt = "You are an AWS Technical Assistant. Provide clear, accurate information about AWS services."
+system_prompt = "You are a great story teller. Provide highly creative and descriptive context regarding the given topics"
 
 # TODO: Create an agent with the Bedrock model and system prompt
 agent = Agent(
@@ -28,4 +28,4 @@ agent = Agent(
 )
 
 # TODO: Send your first message asking for help developing a story character
-agent("Explain to a beginner the pros and cons of AWS Bedrock")
+agent("What would you name the protagonist of the movie 'TENET'")
