@@ -1,0 +1,130 @@
+[tooluse_retrieve_621380206] Status: success, Response:
+Retrieved 3 results with score >= 0.7:
+
+Score: 0.7522
+Document ID: Unknown
+Content: # File: docs/brd-nimbus-assist.md
+---
+title: Business Requirements — Nimbus Assist (AI Support Agent)
+owner: cx-platform@techco
+status: draft
+last-updated: 2025-07-14
+tags: [BRD, Support, Bedrock, RAG]
+---
+
+## Summary
+Nimbus Assist reduces human ticket volume by answering customer questions using curated internal knowledge. It must deliver fast, accurate, citeable answers and hand off seamlessly to humans.
+
+## Problems
+- 32% of tickets are “known answers” buried in wikis/Runbooks.
+- Agents spend 18–25 minutes searching per ticket.
+
+## Users & Use Cases
+- **Customers**: self-service answers in-app and on the help center.
+- **Agents**: suggested replies inside Zendesk.
+- **Compliance**: exported citations for audits.
+
+## Success Metrics (90 days post-launch)
+- ≥35% deflection on Tier-0/Tier-1 topics.
+- ≥4.3/5 answer helpfulness (in-product thumbs).
+- ≤2% unresolved due to hallucinations (spot-check sample).
+- P50 latency ≤ 1200 ms; P95 ≤ 2500 ms.
+
+## High-Level Requirements
+- Retrieval-augmented generation (RAG) with **Bedrock Knowledge Bases**.
+- Answer must include top 1–3 citations.
+- Guardrails for PII leakage and unsupported topics.
+- Multilingual (EN primary; ES/DE fallback).
+- Admin console for source curation and eval dashboards.
+
+## Constraints
+- Data residency: primary in eu-west-1.
+- No cross-tenant leakage (multi-tenant SaaS).
+
+## Non-Functional
+- SLO: 99.9% availability (monthly).
+- Security: KMS-encrypted at rest; TLS 1.2+ in transit.
+
+
+Score: 0.7172
+Document ID: Unknown
+Content: # File: docs/prd-nimbus-assist-v1.md
+---
+title: PRD — Nimbus Assist v1
+owner: product@techco
+status: draft
+last-updated: 2025-07-15
+tags: [PRD, Support, Bedrock, RAG]
+---
+
+## Goals
+Deliver a production AI assistant that answers customer questions from curated sources with citations and safe content handling.
+
+## v1 Scope
+- **Sources**: S3 docs, product manuals, runbooks (Markdown/PDF/HTML).
+- **Retrieval**: Bedrock Knowledge Bases with OpenSearch Serverless vector index.
+- **Generation**: Bedrock-hosted model (family configurable) with system prompt and JSON-serializable citations.
+- **Guardrails**: Block payment/credential collection; redact PII in prompts.
+- **Channels**: Web widget (React), Agent assist (Zendesk macro + sidebar).
+- **Observability**: Request/response traces, retrieval debug view, feedback buttons.
+
+## Out of Scope
+- Voice, mobile SDKs, automatic translation quality guarantees.
+
+## Metrics
+- Deflection %, answer rating, citation coverage %, latency (P50/P95), cost per 100 sessions.
+
+## Acceptance Criteria
+- Answers include at least one valid citation.
+- Admin can enable/disable sources and re-ingest content.
+- Latency budgets enforced via circuit breaker.
+
+## Release Plan
+- Beta: internal help center.
+- GA: all help center + agent assist for Tier-1 queues.
+
+
+Score: 0.7008
+Document ID: Unknown
+Content: # File: docs/design-rag-nimbus-assist.md
+---
+title: Technical Design — Nimbus Assist RAG
+owner: platform-ml@techco
+status: review
+last-updated: 2025-07-16
+tags: [Design, RAG, Bedrock, OpenSearch, Lambda]
+---
+
+## Architecture
+- **Data**: Authoritative docs in S3 (`s3://techco-knowledge/*`).
+- **Index**: OpenSearch Serverless (vector + BM25) managed by Bedrock Knowledge Bases.
+- **Embeddings**: `amazon.titan-embed-text-v2` (configurable).
+- **Orchestration**: API Gateway → Lambda → Bedrock Runtime (retrieve + generate).
+- **Storage**: DynamoDB for chat transcripts; S3 for feedback payloads.
+- **Security**: IAM roles per environment; KMS CMKs; VPC endpoints for Bedrock/OpenSearch.
+
+## Retrieval Parameters
+- Chunk size: 1200–1800 tokens, overlap 150.
+- Top-k: 8; hybrid rerank by score × recency (half-life 30 days).
+- Filters: `product`, `version`, `complianceLevel`.
+
+## Prompt Contract (abridged)
+- System instructions enforce **“answer with citations, no speculation.”**
+- Tool output schema: `{ answer, citations: [{title, uri, span}], safety }`.
+
+## Flow
+```mermaid
+sequenceDiagram
+Client->>API GW: query
+API GW->>Lambda: /ask
+Lambda->>Bedrock KB: retrieve(query, filters)
+Bedrock KB-->>Lambda: passages + scores
+Lambda->>Bedrock Runtime: prompt + passages
+Bedrock Runtime-->>Lambda: answer + citations
+Lambda-->>Client: JSON response
+```
+
+## Failure Modes & Mitigations
+- Empty retrieval → fallback to “can’t answer” policy.
+- Long contexts → dynamic top-k and passage truncation with budget 3500 tokens.
+- Model timeout → cached last good answer (60m) if question hash matches.
