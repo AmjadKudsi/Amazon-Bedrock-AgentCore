@@ -1,0 +1,225 @@
+Tool: read_documentation, type: python
+Fetch and convert an AWS documentation page to markdown format.
+
+## Usage
+
+This tool retrieves the content of an AWS documentation page and converts it to markdown format.
+For long documents, you can make multiple calls with different start_index values to retrieve
+the entire content in chunks.
+
+## URL Requirements
+
+- Must be from the docs.aws.amazon.com domain
+- Must end with .html
+
+## Example URLs
+
+- https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+- https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html
+
+## Output Format
+
+The output is formatted as markdown text with:
+- Preserved headings and structure
+- Code blocks for examples
+- Lists and tables converted to markdown format
+
+## Handling Long Documents
+
+If the response indicates the document was truncated, you have several options:
+
+1. **Continue Reading**: Make another call with start_index set to the end of the previous response
+2. **Stop Early**: For very long documents (>30,000 characters), if you've already found the specific information needed, you can stop reading
+
+Args:
+    ctx: MCP context for logging and error handling
+    url: URL of the AWS documentation page to read
+    max_length: Maximum number of characters to return
+    start_index: On return output starting at this character index
+
+Returns:
+    Markdown content of the AWS documentation
+
+{'json': {'properties': {'url': {'description': 'URL of the AWS documentation page to read', 'title': 'Url', 'type': 'string'}, 'max_length': {'default': 5000, 'description': 'Maximum number of characters to return.', 'exclusiveMaximum': 1000000, 'exclusiveMinimum': 0, 'title': 'Max Length', 'type': 'integer'}, 'start_index': {'default': 0, 'description': 'On return output starting at this character index, useful if a previous fetch was truncated and more content is required.', 'minimum': 0, 'title': 'Start Index', 'type': 'integer'}}, 'required': ['url'], 'title': 'read_documentationArguments', 'type': 'object'}}
+----------
+Tool: search_documentation, type: python
+Search AWS documentation using the official AWS Documentation Search API.
+
+## Usage
+
+This tool searches across all AWS documentation for pages matching your search phrase.
+Use it to find relevant documentation when you don't have a specific URL.
+
+## Search Tips
+
+- Use specific technical terms rather than general phrases
+- Include service names to narrow results (e.g., "S3 bucket versioning" instead of just "versioning")
+- Use quotes for exact phrase matching (e.g., "AWS Lambda function URLs")
+- Include abbreviations and alternative terms to improve results
+- Use guide_type and product_type filters found from a SearchResponse's "facets" property:
+    - Filter only for broad search queries with patterns:
+        - "What is [service]?" -> product_types: ["Amazon Simple Storage Service"]
+        - "How to use <service 1> with <service 2>?" -> product_types: [<service 1>, <service 2>]
+        - "[service] getting started" -> product_types: [<service>] + guide_types: ["User Guide, "Developer Guide"]
+        - "API reference for [service]" -> product_types: [<service>] + guide_types: ["API Reference"]
+
+## Result Interpretation
+
+Each SearchResponse includes:
+- search_results: List of documentation pages, each with:
+    - rank_order: The relevance ranking (lower is more relevant)
+    - url: The documentation page URL
+    - title: The page title
+    - context: A brief excerpt or summary (if available)
+- facets: Available filters (product_types, guide_types) for refining searches
+- query_id: Unique identifier for this search session
+
+
+Args:
+    ctx: MCP context for logging and error handling
+    search_phrase: Search phrase to use
+    search_intent: The intent behind the search requested by the user
+    limit: Maximum number of results to return
+    product_types: Filter by AWS product/service
+    guide_types: Filter by guide type
+
+Returns:
+    List of search results with URLs, titles, query ID, context snippets, and facets for filtering
+
+{'json': {'properties': {'search_phrase': {'description': 'Search phrase to use', 'title': 'Search Phrase', 'type': 'string'}, 'search_intent': {'default': '', 'description': 'For the search_phrase parameter, describe the search intent of the user. CRITICAL: Do not include any PII or customer data, describe only the AWS-related intent for search.', 'title': 'Search Intent', 'type': 'string'}, 'limit': {'default': 10, 'description': 'Maximum number of results to return', 'maximum': 50, 'minimum': 1, 'title': 'Limit', 'type': 'integer'}, 'product_types': {'anyOf': [{'items': {'type': 'string'}, 'type': 'array'}, {'type': 'null'}], 'default': None, 'description': 'Filter results by AWS product/service (e.g., ["Amazon Simple Storage Service"])', 'title': 'Product Types'}, 'guide_types': {'anyOf': [{'items': {'type': 'string'}, 'type': 'array'}, {'type': 'null'}], 'default': None, 'description': 'Filter results by guide type (e.g., ["User Guide", "API Reference", "Developer Guide"])', 'title': 'Guide Types'}}, 'required': ['search_phrase'], 'title': 'search_documentationArguments', 'type': 'object'}}
+----------
+Tool: recommend, type: python
+Get content recommendations for an AWS documentation page.
+
+## Usage
+
+This tool provides recommendations for related AWS documentation pages based on a given URL.
+Use it to discover additional relevant content that might not appear in search results.
+
+## Recommendation Types
+
+The recommendations include four categories:
+
+1. **Highly Rated**: Popular pages within the same AWS service
+2. **New**: Recently added pages within the same AWS service - useful for finding newly released features
+3. **Similar**: Pages covering similar topics to the current page
+4. **Journey**: Pages commonly viewed next by other users
+
+## When to Use
+
+- After reading a documentation page to find related content
+- When exploring a new AWS service to discover important pages
+- To find alternative explanations of complex concepts
+- To discover the most popular pages for a service
+- To find newly released information by using a service's welcome page URL and checking the **New** recommendations
+
+## Finding New Features
+
+To find newly released information about a service:
+1. Find any page belong to that service, typically you can try the welcome page
+2. Call this tool with that URL
+3. Look specifically at the **New** recommendation type in the results
+
+## Result Interpretation
+
+Each recommendation includes:
+- url: The documentation page URL
+- title: The page title
+- context: A brief description (if available)
+
+Args:
+    ctx: MCP context for logging and error handling
+    url: URL of the AWS documentation page to get recommendations for
+
+Returns:
+    List of recommended pages with URLs, titles, and context
+
+{'json': {'properties': {'url': {'description': 'URL of the AWS documentation page to get recommendations for', 'title': 'Url', 'type': 'string'}}, 'required': ['url'], 'title': 'recommendArguments', 'type': 'object'}}
+----------
+I'll help you find the most recent AWS Bedrock features released in 2025. Let me search for recent Bedrock documentation and then look for newly released information.
+Tool #1: search_documentation
+Great! I found the document history page which should contain the most recent updates. Let me also check the main Bedrock page for recommendations to find any new features. First, let me read the document history to see the latest releases:
+Tool #2: read_documentation
+Let me continue reading to see more recent updates:
+Tool #3: read_documentation
+Now let me also get recommendations from the main Bedrock page to find any other new features:
+Tool #4: recommend
+Based on the document history and my analysis, here are the most recent AWS Bedrock features released in 2025:
+
+## **Most Recent AWS Bedrock Features Released in 2025**
+
+### **Latest Updates (December 2025)**
+
+1. **Service Tier Updates** (December 31, 2025)
+   - Updated list of models supported for **priority and flex service tiers**
+
+2. **Amazon Bedrock Data Automation Blueprint Optimization** (December 18, 2025)
+   - **Blueprint instruction optimization** for documents
+   - Improve accuracy by providing example content with ground truth labels
+   - Achieve production-ready accuracy in minutes without model training
+
+3. **Amazon Bedrock Mantle - OpenAI Compatible APIs** (December 3, 2025)
+   - **OpenAI-compatible API endpoints** including:
+     - Responses API
+     - Chat Completions API
+   - **Asynchronous inference** for long-running workloads
+   - **Stateful conversation management** without manual history passing
+   - **Simplified tool use integration** for agentic workflows
+   - Migrate existing applications with minimal code changes
+   - New managed IAM policies: `AmazonBedrockMantleFullAccess`, `AmazonBedrockMantleReadOnly`, `AmazonBedrockMantleInferenceAccess`
+
+4. **Reinforcement Fine-Tuning** (December 3, 2025)
+   - New **reinforcement fine-tuning capability** to improve foundation model performance through feedback signals
+
+### **November 2025 Features**
+
+5. **Reserved Service Tier** (November 26, 2025)
+   - New **"Reserved" service tier** for Bedrock inference
+
+6. **Claude Opus 4.5 Support** (November 24, 2025)
+   - **Anthropic Claude Opus 4.5** is now available
+
+7. **Cross-Account Guardrails Sharing** (November 21, 2025)
+   - Share **guardrails across accounts** within an AWS organization
+
+8. **Synchronous Data Automation** (November 20, 2025)
+   - **Amazon Bedrock Data Automation** now supports synchronous invocation
+
+9. **OpenAI GPT-OSS Model Support** (November 19, 2025)
+   - **Custom model import** now supports OpenAI GPT-OSS models
+   - Enhanced **coding use case support** for Standard tier Guardrails
+
+10. **Priority and Flex Service Tiers** (November 18, 2025)
+    - New service tiers: **priority** and **flex** for on-demand inference
+    - **Regional expansion** to Africa (Cape Town), Asia Pacific (New Zealand), Canada West (Calgary), Mexico (Central), and Middle East (Bahrain)
+
+### **October 2025 Features**
+
+11. **Stability AI Image Services** (October 28, 2025)
+    - Four new **Stability AI Image Services** (outpaint and upscale)
+
+12. **Model Chaining for Customization** (October 16, 2025)
+    - Use previously customized models (fine-tuned or distilled) as **base models for further customization**
+
+13. **Claude Haiku 4.5** (October 15, 2025)
+    - **Anthropic Claude Haiku 4.5** now available
+    - **Default model access** - All Bedrock foundation models now enabled by default with correct IAM permissions
+
+14. **Enhanced Batch Inference** (October 3, 2025)
+    - Batch inference now supports **DeepSeek V3.1**, **Qwen3 models**, and **Qwen3-Coder models**
+
+### **September 2025 Features**
+
+15. **Claude Sonnet 4.5** (September 29, 2025)
+    - **Anthropic Claude Sonnet 4.5** support
+
+16. **Enhanced Flows** (September 26, 2025)
+    - **Flows trace enhancements** and **DoWhile loop node** functionality
+
+17. **Stability AI Image Services General Release** (September 18, 2025)
+    - **Stability AI Image Services** now generally available
+
+18. **Meta Llama 3.3 70B Fine-tuning** (September 15, 2025)
+    - **Meta Llama 3.3 70B Instruct** available for fine-tuning and continued pretraining
+
+These features represent significant enhancements to AWS Bedrock in 2025, with particular emphasis on **OpenAI compatibility**, **enhanced customization capabilities**, **new model support**, and **expanded regional availability**. The OpenAI-compatible APIs (Bedrock Mantle) are especially notable as they make it easier for developers to migrate existing applications to Bedrock.

@@ -1,0 +1,58 @@
+I'll gather information about your users, clusters, instances, and cost overviews for both weekly and monthly periods.
+Tool #1: list_users
+
+Tool #2: list_clusters
+
+Tool #3: list_instances
+
+Tool #4: cost_overview
+
+Tool #5: cost_overview
+Here's a comprehensive breakdown of your AWS resources and costs:
+
+## 👥 IAM Users (4 total)
+- **alice** - Created: Oct 1, 2023
+- **bob** - Created: Feb 15, 2024  
+- **charlie** - Created: Nov 3, 2024
+- **dora** - Created: Jan 20, 2025
+
+## 🔧 Compute Clusters (3 total)
+
+### EKS Clusters
+- **eks-dev** (us-west-2)
+  - 3 nodes, Kubernetes 1.29
+  - Status: 🟢 Green
+- **eks-prod** (eu-west-1) 
+  - 12 nodes, Kubernetes 1.28
+  - Status: 🟡 Yellow
+
+### EMR Clusters
+- **emr-etl** (us-east-1)
+  - 6 nodes, Hadoop 3.3
+  - Status: 🟢 Green
+
+## 💻 EC2 Instances (3 total)
+
+### Running Instances (2)
+- **i-1234567890abcdef0** (web-1): t3.micro in us-west-2a
+- **i-aaaaaaaaaaaaaaaaa** (app-7): c6i.large in us-east-1c
+
+### Stopped Instances (1)
+- **i-a1b2c3d4e5f6g7h8i** (etl-2): m5.2xlarge in eu-west-1b
+
+## 💰 Cost Overview
+
+### Weekly (7 days): $87.21 USD
+- EC2: $55.19 (63.3%)
+- RDS: $22.59 (25.9%)
+- S3: $9.43 (10.8%)
+
+### Monthly (30 days): $161.13 USD
+- EC2: $99.12 (61.5%)
+- RDS: $44.56 (27.7%)
+- S3: $17.45 (10.8%)
+
+**Key Observations:**
+- EC2 is your largest cost driver (~60-63% of total spend)
+- You have one EKS cluster in "yellow" status that may need attention
+- One large instance (m5.2xlarge) is currently stopped, which is good for cost optimization

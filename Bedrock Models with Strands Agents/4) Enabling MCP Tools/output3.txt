@@ -1,0 +1,187 @@
+Tool: read_documentation, type: python
+Fetch and convert an AWS documentation page to markdown format.
+
+## Usage
+
+This tool retrieves the content of an AWS documentation page and converts it to markdown format.
+For long documents, you can make multiple calls with different start_index values to retrieve
+the entire content in chunks.
+
+## URL Requirements
+
+- Must be from the docs.aws.amazon.com domain
+- Must end with .html
+
+## Example URLs
+
+- https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+- https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html
+
+## Output Format
+
+The output is formatted as markdown text with:
+- Preserved headings and structure
+- Code blocks for examples
+- Lists and tables converted to markdown format
+
+## Handling Long Documents
+
+If the response indicates the document was truncated, you have several options:
+
+1. **Continue Reading**: Make another call with start_index set to the end of the previous response
+2. **Stop Early**: For very long documents (>30,000 characters), if you've already found the specific information needed, you can stop reading
+
+Args:
+    ctx: MCP context for logging and error handling
+    url: URL of the AWS documentation page to read
+    max_length: Maximum number of characters to return
+    start_index: On return output starting at this character index
+
+Returns:
+    Markdown content of the AWS documentation
+
+{'json': {'properties': {'url': {'description': 'URL of the AWS documentation page to read', 'title': 'Url', 'type': 'string'}, 'max_length': {'default': 5000, 'description': 'Maximum number of characters to return.', 'exclusiveMaximum': 1000000, 'exclusiveMinimum': 0, 'title': 'Max Length', 'type': 'integer'}, 'start_index': {'default': 0, 'description': 'On return output starting at this character index, useful if a previous fetch was truncated and more content is required.', 'minimum': 0, 'title': 'Start Index', 'type': 'integer'}}, 'required': ['url'], 'title': 'read_documentationArguments', 'type': 'object'}}
+----------
+Tool: search_documentation, type: python
+Search AWS documentation using the official AWS Documentation Search API.
+
+## Usage
+
+This tool searches across all AWS documentation for pages matching your search phrase.
+Use it to find relevant documentation when you don't have a specific URL.
+
+## Search Tips
+
+- Use specific technical terms rather than general phrases
+- Include service names to narrow results (e.g., "S3 bucket versioning" instead of just "versioning")
+- Use quotes for exact phrase matching (e.g., "AWS Lambda function URLs")
+- Include abbreviations and alternative terms to improve results
+- Use guide_type and product_type filters found from a SearchResponse's "facets" property:
+    - Filter only for broad search queries with patterns:
+        - "What is [service]?" -> product_types: ["Amazon Simple Storage Service"]
+        - "How to use <service 1> with <service 2>?" -> product_types: [<service 1>, <service 2>]
+        - "[service] getting started" -> product_types: [<service>] + guide_types: ["User Guide, "Developer Guide"]
+        - "API reference for [service]" -> product_types: [<service>] + guide_types: ["API Reference"]
+
+## Result Interpretation
+
+Each SearchResponse includes:
+- search_results: List of documentation pages, each with:
+    - rank_order: The relevance ranking (lower is more relevant)
+    - url: The documentation page URL
+    - title: The page title
+    - context: A brief excerpt or summary (if available)
+- facets: Available filters (product_types, guide_types) for refining searches
+- query_id: Unique identifier for this search session
+
+
+Args:
+    ctx: MCP context for logging and error handling
+    search_phrase: Search phrase to use
+    search_intent: The intent behind the search requested by the user
+    limit: Maximum number of results to return
+    product_types: Filter by AWS product/service
+    guide_types: Filter by guide type
+
+Returns:
+    List of search results with URLs, titles, query ID, context snippets, and facets for filtering
+
+{'json': {'properties': {'search_phrase': {'description': 'Search phrase to use', 'title': 'Search Phrase', 'type': 'string'}, 'search_intent': {'default': '', 'description': 'For the search_phrase parameter, describe the search intent of the user. CRITICAL: Do not include any PII or customer data, describe only the AWS-related intent for search.', 'title': 'Search Intent', 'type': 'string'}, 'limit': {'default': 10, 'description': 'Maximum number of results to return', 'maximum': 50, 'minimum': 1, 'title': 'Limit', 'type': 'integer'}, 'product_types': {'anyOf': [{'items': {'type': 'string'}, 'type': 'array'}, {'type': 'null'}], 'default': None, 'description': 'Filter results by AWS product/service (e.g., ["Amazon Simple Storage Service"])', 'title': 'Product Types'}, 'guide_types': {'anyOf': [{'items': {'type': 'string'}, 'type': 'array'}, {'type': 'null'}], 'default': None, 'description': 'Filter results by guide type (e.g., ["User Guide", "API Reference", "Developer Guide"])', 'title': 'Guide Types'}}, 'required': ['search_phrase'], 'title': 'search_documentationArguments', 'type': 'object'}}
+----------
+Tool: recommend, type: python
+Get content recommendations for an AWS documentation page.
+
+## Usage
+
+This tool provides recommendations for related AWS documentation pages based on a given URL.
+Use it to discover additional relevant content that might not appear in search results.
+
+## Recommendation Types
+
+The recommendations include four categories:
+
+1. **Highly Rated**: Popular pages within the same AWS service
+2. **New**: Recently added pages within the same AWS service - useful for finding newly released features
+3. **Similar**: Pages covering similar topics to the current page
+4. **Journey**: Pages commonly viewed next by other users
+
+## When to Use
+
+- After reading a documentation page to find related content
+- When exploring a new AWS service to discover important pages
+- To find alternative explanations of complex concepts
+- To discover the most popular pages for a service
+- To find newly released information by using a service's welcome page URL and checking the **New** recommendations
+
+## Finding New Features
+
+To find newly released information about a service:
+1. Find any page belong to that service, typically you can try the welcome page
+2. Call this tool with that URL
+3. Look specifically at the **New** recommendation type in the results
+
+## Result Interpretation
+
+Each recommendation includes:
+- url: The documentation page URL
+- title: The page title
+- context: A brief description (if available)
+
+Args:
+    ctx: MCP context for logging and error handling
+    url: URL of the AWS documentation page to get recommendations for
+
+Returns:
+    List of recommended pages with URLs, titles, and context
+
+{'json': {'properties': {'url': {'description': 'URL of the AWS documentation page to get recommendations for', 'title': 'Url', 'type': 'string'}}, 'required': ['url'], 'title': 'recommendArguments', 'type': 'object'}}
+----------
+I'll help you find the most recent AWS Bedrock features released in 2025. Let me search for recent Bedrock documentation and then look for newly released information.
+Tool #1: search_documentation
+
+Tool #2: search_documentation
+
+Tool #3: search_documentation
+
+Tool #4: search_documentation
+
+Tool #5: search_documentation
+
+Tool #6: search_documentation
+
+Tool #7: search_documentation
+
+Tool #8: search_documentation
+
+Tool #9: search_documentation
+
+Tool #10: search_documentation
+
+Tool #11: search_documentation
+
+Tool #12: search_documentation
+I apologize, but I'm experiencing technical difficulties with accessing the AWS documentation search tools at the moment. However, I can provide you with some general guidance on finding the most recent AWS Bedrock features:
+
+## Where to Find the Latest AWS Bedrock Features:
+
+1. **AWS What's New Portal**: Check https://aws.amazon.com/new/ and filter for "Amazon Bedrock" to see recent announcements
+
+2. **AWS Bedrock Documentation**: Visit the official Amazon Bedrock documentation at https://docs.aws.amazon.com/bedrock/ and look for:
+   - Release notes
+   - What's new sections
+   - Recently updated features
+
+3. **AWS Blog**: The AWS AI/ML blog frequently covers new Bedrock features and capabilities
+
+4. **AWS re:Invent 2024 Announcements**: Many new features are typically announced at AWS re:Invent (held in late 2024) that become available in early 2025
+
+## Common Types of Recent Bedrock Updates:
+
+- **New Foundation Models**: Additional model providers and model versions
+- **Enhanced Agents**: Improved capabilities for Bedrock Agents
+- **Knowledge Bases**: New features for RAG (Retrieval Augmented Generation)
+- **Guardrails**: Enhanced safety and content filtering
+- **Fine-tuning**: New fine-tuning capabilities for custom models
+- **API Enhancements**: New parameters and functionality in the Bedrock API
+
+Would you like me to try accessing specific AWS Bedrock documentation pages directly if you have particular areas of interest, or would you prefer guidance on where to look for the most up-to-date information about Bedrock features?
